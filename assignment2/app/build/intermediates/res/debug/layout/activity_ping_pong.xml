@@ -32,4 +32,4 @@
     android:layout_height="wrap_content"
     android:onClick="playButtonClicked" />    
 </LinearLayout>
-<!-- From: file:/media/will/DATA/Workspaces/Android%20Studio/assignment2/app/src/main/res/layout/activity_ping_pong.xml -->
+<!-- From: file:/media/will/DATA/Workspaces/Android%20Studio/POSA-15/assignment2/app/src/main/res/layout/activity_ping_pong.xml -->

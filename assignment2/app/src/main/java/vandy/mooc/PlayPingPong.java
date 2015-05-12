@@ -38,7 +38,8 @@ public class PlayPingPong implements Runnable {
      * HandlerThreads.
      */
     // @@ TODONE - you fill in here.
-    Handler[] mHandler = new Handler[2];
+    private final Handler[] mHandler =
+            new Handler[PingPong.values().length];
 
     /**
      * Define a CyclicBarrier synchronizer that ensures the
@@ -46,7 +47,8 @@ public class PlayPingPong implements Runnable {
      * algorithm begins.
      */
     // @@ TODONE - you fill in here.
-    CyclicBarrier mBarrier = new CyclicBarrier(2);
+    private final CyclicBarrier mBarrier =
+            new CyclicBarrier(PingPong.values().length);
 
     /**
      * Implements the concurrent ping/pong algorithm using a pair of
@@ -91,11 +93,7 @@ public class PlayPingPong implements Runnable {
             // Create the Handler that will service this type of
             // Handler, i.e., either PING or PONG.
             // @@ TODONE - you fill in here.
-            if (PingPong.PING == mMyType) {
-                mHandler[0] = new Handler(this);
-            } else {
-                mHandler[1] = new Handler(this);
-            }
+            mHandler[mMyType.ordinal()] = new Handler(this);
 
             try {
                 // Wait for both Threads to initialize their Handlers.
@@ -112,7 +110,10 @@ public class PlayPingPong implements Runnable {
             // sending the Message to the PING_THREAD's Handler.
             // @@ TODONE - you fill in here.
             if (PingPong.PONG == this.mMyType) {
-                Message m = Message.obtain(mHandler[0], 1, mHandler[1]);
+                Message m = Message.obtain(
+                        mHandler[PingPong.PING.ordinal()],
+                        1,
+                        mHandler[PingPong.PONG.ordinal()]);
                 m.sendToTarget();
             }
         }
@@ -186,7 +187,8 @@ public class PlayPingPong implements Runnable {
        
         // Create the ping and pong threads.
         // @@ TODONE - you fill in here.
-        PingPongThread[] t = new PingPongThread[2];
+        PingPongThread[] t =
+                new PingPongThread[PingPong.values().length];
         t[0] = new PingPongThread(PingPong.PING);
         t[1] = new PingPongThread(PingPong.PONG);
 
